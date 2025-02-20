@@ -29,10 +29,14 @@ from .mistral import FastMistralModel
 from .qwen2 import FastQwen2Model
 
 try:
-    from huggingface_hub.utils import get_token
+    from huggingface_hub import get_token
 except:
-    # Old HF Hub versions <= 0.0.25
-    from huggingface_hub.utils._token import get_token
+    try:
+        from huggingface_hub.utils import get_token
+    except:
+        # For older versions of huggingface_hub
+        from huggingface_hub.utils._token import get_token
+    pass
 pass
 import importlib.util
 
